@@ -2,7 +2,7 @@
 import Sequelize, { Model } from 'sequelize';
 
 export default class Aluno extends Model {
-  static(sequelize) {
+  static init(sequelize) {
     // todos os campos não automáticos devem ser informados
     super.init({
       nome: Sequelize.STRING,
