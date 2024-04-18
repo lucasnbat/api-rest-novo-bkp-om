@@ -60,4 +60,9 @@ export default class User extends Model {
 
     return this;
   }
+
+  // validação de senha que será chamada no TokenController
+  passwordIsValid(password) {
+    return bcrypt.compare(password, this.password_hash);
+  }
 }
