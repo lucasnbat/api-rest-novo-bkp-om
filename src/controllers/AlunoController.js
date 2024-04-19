@@ -19,7 +19,7 @@ class AlunoController {
       // essa relação foi feita na migration, também
       include: {
         model: Foto,
-        attributes: ['filename'],
+        attributes: ['url', 'filename'],
       },
     });
     res.json(alunos);
@@ -62,7 +62,7 @@ class AlunoController {
         // essa relação foi feita na migration, também
         include: {
           model: Foto,
-          attributes: ['filename'],
+          attributes: ['url', 'filename'],
         },
       });
 
