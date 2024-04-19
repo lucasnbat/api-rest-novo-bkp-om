@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
+import User from '../models/User';
 
-export default (req, res, next) => {
+export default async (req, res, next) => {
   const { authorization } = req.headers;
 
   // se não tem autorização, retorna erro
@@ -19,6 +20,18 @@ export default (req, res, next) => {
 
     // posso extrair de volta o id e email
     const { id, email } = dados;
+
+    const user = await User.findOne({
+      where: { id, email },
+    });
+
+    // verificar se o id e email batem com algum email existente no BD
+    // (trocou o email, por exemplo, não vai bater mais)
+    if (!user) {
+      return res.status(401).json({
+        errors: ['Usuário inválido'],
+      });
+    }
 
     // inserindo os dados estraídos na requisição feita antes do middleware
     req.userId = id;
