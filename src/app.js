@@ -20,7 +20,7 @@ class App {
   middlewares() {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json()); // para trabalhar com json na app
-    this.app.use(express.static(resolve(__dirname, '..', 'uploads', 'images'))); // caminho para arquivos estaticos
+    this.app.use(express.static('/images/', resolve(__dirname, '..', 'uploads', 'images'))); // caminho para arquivos estaticos
   }
 
   routes() {
