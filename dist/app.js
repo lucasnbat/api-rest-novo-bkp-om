@@ -20,7 +20,7 @@ class App {
   middlewares() {
     this.app.use(_express2.default.urlencoded({ extended: true }));
     this.app.use(_express2.default.json()); // para trabalhar com json na app
-    this.app.use(_express2.default.static(_path.resolve.call(void 0, __dirname, 'uploads'))); // caminho para arquivos estaticos
+    this.app.use(_express2.default.static(_path.resolve.call(void 0, __dirname, '..', 'uploads', 'images'))); // caminho para arquivos estaticos
   }
 
   routes() {
