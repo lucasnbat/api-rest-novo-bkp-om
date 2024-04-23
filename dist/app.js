@@ -12,21 +12,20 @@ require('./database'); // já chama o index.js automatico
 
 _dotenv2.default.config();
 
-// const whiteList = [
-//   'http://localhost:3001',
-//   'http://192.168.100.200:3001',
-//   'http://192.168.100.200',
-// ];
-
-// const corsOptions = {
-//   origin(origin, callback) {
-//     if (whiteList.indexOf(origin) !== -1 || !origin) {
-//       callback(null, true); // permite o site
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-// };
+const whiteList = [
+  'http://localhost:3001',
+  'http://192.168.100.200:3001',
+  'http://192.168.100.200',
+];
+const corsOptions = {
+  origin(origin, callback) {
+    if (whiteList.indexOf(origin) !== -1 || !origin) {
+      callback(null, true); // permite o site
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
 
 class App {
   constructor() {
@@ -36,7 +35,7 @@ class App {
   }
 
   middlewares() {
-    this.app.use(_cors2.default.call(void 0, )); // permite que outras aplicações acessem a api
+    this.app.use(_cors2.default.call(void 0, corsOptions)); // permite que outras aplicações acessem a api
     this.app.use(_helmet2.default.call(void 0, )); // adiciona segurança a aplicação
     this.app.use(_express2.default.urlencoded({ extended: true }));
     this.app.use(_express2.default.json()); // para trabalhar com json na app
