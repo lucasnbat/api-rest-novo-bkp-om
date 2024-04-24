@@ -12,20 +12,26 @@ import './database'; // já chama o index.js automatico
 
 dotenv.config();
 
-const whiteList = [
-  'http://localhost:3001',
-  'http://192.168.100.200:3001',
-  'http://192.168.100.200',
-];
-const corsOptions = {
-  origin(origin, callback) {
-    if (whiteList.indexOf(origin) !== -1 || !origin) {
-      callback(null, true); // permite o site
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-};
+// const whiteList = [
+//   'http://localhost:3001',
+//   'http://192.168.100.200:3001',
+//   'http://192.168.100.200',
+//   'http://localhost:3000',
+//   'http://192.168.100.176:3000',
+//   'http://172.31.144.1:3000',
+//   'http://192.168.100.176',
+//   'http://172.31.144.1',
+//   'http://localhost:3000/',
+// ];
+// const corsOptions = {
+//   origin(origin, callback) {
+//     if (whiteList.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true); // permite o site
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+// };
 
 class App {
   constructor() {
@@ -35,7 +41,7 @@ class App {
   }
 
   middlewares() {
-    this.app.use(cors(corsOptions)); // permite que outras aplicações acessem a api
+    this.app.use(cors()); // permite que outras aplicações acessem a api
     this.app.use(helmet()); // adiciona segurança a aplicação
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json()); // para trabalhar com json na app
